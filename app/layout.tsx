@@ -9,7 +9,7 @@ import {
   UserButton
 } from '@clerk/nextjs'
 import { AppWrapper } from "@/store/store";
-import { StreamProvider } from "@/utils/StreamCallProvider";
+
 const inter = Inter({ subsets: ["latin"] });
 import "@stream-io/video-react-sdk/dist/css/styles.css";
 
@@ -37,10 +37,10 @@ export default function RootLayout({
         }
       }}>
             <AppWrapper >
-        <StreamProvider>
+      
         {children}
         
-        </StreamProvider>
+      
         </AppWrapper >
         </ClerkProvider>
         </body>
