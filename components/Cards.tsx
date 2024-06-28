@@ -1,11 +1,18 @@
 import React from 'react'
 import Image from 'next/image'
+import { FaHeart } from "react-icons/fa";
+import Link from 'next/link';
 type Props = {
-    title:string,
+    elm:{title:string,
     desc:string,
-    color:string,
-    icon:string,
-    handler: ()=> void
+    id:string,
+    type:string,
+    tags:string[],
+    support:string,
+    location:string,
+    postedBy:string,
+    savedBy: string[]
+    }
       
     
 }
@@ -15,14 +22,23 @@ const colors = {
   darkblue: '#303f9f'
 };
 const Cards = (props: Props) => {
-    console.log(props.color)
+    
   return (
-    <div onClick={()=>{console.log("hello"); props.handler()}} className={` text-white flex rounded p-4 flex-col justify-center  h-36 ${props.color}`}>
+    <div  
+     className={`  shadow-md shadow-purple-900 w-4/5 text-black relative flex rounded-xl p-6 flex-col justify-center  bg-slate-100`}>
+      <FaHeart className={`absolute rotate-180 right-4 top-4`} />
         <div className='flex gap-2'>
-       <Image src={props.icon} width={40} height={40} alt="icon" />
-       <p className='text-lg font-semibold'>{props.title}</p>
+       
+       <Link href={`/job/${props.elm.id}`}className='text-lg font-semibold'>{props.elm.title}</Link>
        </div>
-       <p className='text-sm'>{props.desc}</p>
+       <p className='text-sm'>{props.elm.desc.substring(0,300)}...</p>
+<div className='flex flex-wrap gap-4 mt-6'>
+       {
+        props.elm.tags.map((elm)=>(
+          <h2 className=' p-2  rounded bg-slate-200 text-black'>{elm}</h2>
+        ))
+       }
+       </div>
     </div>
   )
 }

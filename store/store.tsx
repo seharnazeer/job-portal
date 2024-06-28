@@ -1,4 +1,5 @@
 'use client'
+import Navbar from "@/components/navbar";
 import { createContext, useContext, useState } from "react";
 
 
@@ -17,6 +18,7 @@ export function AppWrapper({children}:{children:React.ReactNode}){
      launch,
      setlaunch
     }}>
+      <Navbar />
     {
       children
     }

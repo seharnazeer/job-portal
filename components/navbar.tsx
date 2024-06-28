@@ -13,10 +13,10 @@ const Navbar = (props: Props) => {
   const {navbar,setnavbar}=useAppContext()
   return (
     <div className=' w-full h-20 text-white bg-purple-900 flex  items-center justify-between pl-8 pr-8'>
-        <div className='flex gap-2 items-center'>
+        <Link href="/" className='flex gap-2 items-center'>
         <Image src='/favico.png' height={70} width={70}  alt='logo'/>
         <h3 className=' italic font-bold font-mono'>Job Portal</h3>
-        </div>
+        </Link>
         
         <SignedOut>
           <SignInButton />
