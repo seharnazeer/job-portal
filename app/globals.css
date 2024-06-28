@@ -1,6 +1,6 @@
 @tailwind base;
 @tailwind components;
-@tailwind utilities;
+
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -30,4 +30,12 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+@tailwind utilities;
+
+.medium-heading{
+  @apply text-white font-medium  text-[18px] leading-3
+}
+.modal{
+  @apply bg-secondary/80 text-white rounded 
 }
