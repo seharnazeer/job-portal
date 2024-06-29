@@ -65,14 +65,14 @@ const JobPost = (props: Props) => {
         }
     }
   return (
-    <>
-    <Navbar />
+    <div className='w-full'>
+    
     <ToastContainer />
-    <div className='w-full flex items-center justify-between min-h-screen text-purple-900'>
+    <div className='w-full flex items-center min-h-screen text-purple-900'>
         <div className='flex w-full items-center  flex-col justify-center'>
             <h3 className=' text-xl md:text-5xl font-bold font-mono mb-6 mt-6'>Post Job</h3>
 
-           <div className='flex w-4/5 flex-col gap-4'>
+           <div className='flex  flex-col gap-4'>
                 <input value={title} placeholder='Job Title' className='p-2 rounded'  onChange={({target:{value}})=>settitle(value)} />
                 <textarea value={desc} rows={3} placeholder='Desc' className='p-2 rounded'  onChange={({target:{value}})=>setdesc(value)} />
                     <div className='flex gap-2'>
@@ -120,7 +120,7 @@ const JobPost = (props: Props) => {
 
         </div>
     </div>
-    </>
+    </div>
   )
 }
 

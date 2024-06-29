@@ -1,5 +1,6 @@
 'use client'
 import Navbar from "@/components/navbar";
+import SideBar from "@/components/sidebar";
 import { createContext, useContext, useState } from "react";
 
 
@@ -19,9 +20,17 @@ export function AppWrapper({children}:{children:React.ReactNode}){
      setlaunch
     }}>
       <Navbar />
+      <div className="flex w-full ">
+        <div className=" w-1/4">
+        
+          <SideBar />
+        </div>
+        <div className="p-3   w-full">
     {
       children
     }
+    </div>
+    </div>
     </AppContext.Provider>
   )
 }
