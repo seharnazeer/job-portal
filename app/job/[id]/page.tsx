@@ -1,5 +1,7 @@
 'use client'
 import { db } from '@/utils/firebase.config';
+import { addLike, removeLike } from '@/utils/updateLike';
+import { useUser } from '@clerk/nextjs';
 import { doc, getDoc } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
 import { FaHeart } from 'react-icons/fa';
@@ -7,6 +9,7 @@ import { FaHeart } from 'react-icons/fa';
 type Props = {}
 
 const JobDesc = ({params}) => {
+    const {user,isLoaded}=useUser();
   console.log(params);
   const [job,setjob]=useState<any>([]);
   async function getJob(){
@@ -15,18 +18,29 @@ const JobDesc = ({params}) => {
     if(docSnap.exists()){
         console.log("job",docSnap.data());
         const newdata=docSnap.data();
-        setjob([{title:newdata.title,desc:newdata.desc,type:newdata.type,tags:newdata.tags,location:newdata.location,savedBy:newdata.savedBy,support:newdata.support}]);
+        setjob([{id:docSnap.id,title:newdata.title,desc:newdata.desc,type:newdata.type,tags:newdata.tags,location:newdata.location,savedBy:newdata.savedBy,support:newdata.support}]);
         console.log(job)
     }
   }
   useEffect(()=>{
     getJob()
   },[])
+  const like=async (id:string | undefined,docId:string)=>{
+      console.log(id,docId)
+       await addLike(id!,docId)
+       getJob()
+  }
+  const dislike=async (id:string | undefined,docId:string)=>{
+    await removeLike(id!,docId)
+   getJob()
+   }
   return (
     <div className='flex  items-center pt-24 flex-col min-h-screen'>
         {
             job.length >0 ?<div className='flex relative w-4/5 flex-col gap-2'>
-                <FaHeart className='w-6h-6 absolute top-4 right-4' />
+                {
+                    job[0].savedBy.includes(user?.id) ?<FaHeart onClick={()=>dislike(user?.id,job[0].id)} className='w-6h-6 text-purple-900 absolute top-4 right-4' />:<FaHeart onClick={()=>like(user?.id,job[0].id)} className='w-6h-6 absolute top-4 right-4' />
+                }
             <h2 className='font-bold md:text-4xl text-xl'>{job[0].title}</h2>
             <p>{job[0].desc}</p>
             <div className='flex flex-wrap gap-4'>

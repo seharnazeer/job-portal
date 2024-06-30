@@ -1,6 +1,6 @@
 'use client'
 import { db } from '@/utils/firebase.config';
-import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, query, where , onSnapshot} from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
 import Cards from '@/components/Cards';
 import { useUser } from '@clerk/nextjs';
@@ -29,15 +29,26 @@ console.log('g',alljobs)
   useEffect(()=>{
     getData()
   },[])
+
+  const getUpdate=(docId:string)=>{
+
+  
+    onSnapshot(doc(db,"job-portal",docId),(doc)=>{
+        console.log("updated ddata", doc.data(),doc.id)
+        setalljobs((prev:any)=>prev.map((el:any)=>el.id=== docId?doc.data():el))
+       
+      })
   return (
     <div className='flex flex-col gap-6  overflow-y-scroll p-6 items-center h-screen'>
     {
       alljobs.length>0? alljobs.map((elm : any)=>(
-        <Cards elm={elm} />
+        <Cards id={elm.id} updateJob={(docid,type)=>{
+          getUpdate(docId)
+        }} elm={elm} />
       )):null
-    }
+  }
     </div>
   )
 }
-
+}
 export default MyJobs

@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import { FaHeart } from "react-icons/fa";
 import Link from 'next/link';
+import { addLike, removeLike } from '@/utils/updateLike';
 type Props = {
     elm:{title:string,
     desc:string,
@@ -12,8 +13,9 @@ type Props = {
     location:string,
     postedBy:string,
     savedBy: string[]
-    }
-      
+    },
+    id:string | undefined
+    updateJob:(docId:string,type:string)=>void
     
 }
 const colors = {
@@ -26,7 +28,18 @@ const Cards = (props: Props) => {
   return (
     <div  
      className={`  shadow-md shadow-purple-900 w-4/5 text-black relative flex rounded-xl p-6 flex-col justify-center  bg-slate-100`}>
-      <FaHeart className={`absolute rotate-180 right-4 top-4`} />
+      {
+        props.elm.savedBy.includes(props.id!) ?<FaHeart onClick={async()=>{
+          console.log('jhfehivfue')
+          await removeLike(props.id!,props.elm.id);
+         props.updateJob(props.elm.id,'remove');
+         }}  className={`absolute text-purple-900 rotate-180 right-4 top-4`} />:<FaHeart onClick={async()=>{
+          console.log('jhfehivfue')
+          await addLike(props.id!,props.elm.id);
+         props.updateJob(props.elm.id,'add');
+         }} className={`absolute rotate-180 right-4 top-4`} />
+      }
+      
         <div className='flex gap-2'>
        
        <Link href={`/job/${props.elm.id}`}className='text-lg font-semibold'>{props.elm.title}</Link>
