@@ -33,11 +33,11 @@ const Cards = (props: Props) => {
           console.log('jhfehivfue')
           await removeLike(props.id!,props.elm.id);
          props.updateJob(props.elm.id,'remove');
-         }}  className={`absolute text-purple-900 rotate-180 right-4 top-4`} />:<FaHeart onClick={async()=>{
+         }}  className={`absolute text-purple-900  right-4 top-4 w-6 h-6`} />:<FaHeart onClick={async()=>{
           console.log('jhfehivfue')
           await addLike(props.id!,props.elm.id);
          props.updateJob(props.elm.id,'add');
-         }} className={`absolute rotate-180 right-4 top-4`} />
+         }} className={`absolute rotate-180 w-6 h-6 right-4 top-4`} />
       }
       
         <div className='flex gap-2'>

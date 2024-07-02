@@ -7,38 +7,34 @@ import { useUser } from '@clerk/nextjs';
 
 type Props = {}
 
-const MyJobs = (props: Props) => {
+const Saved = (props: Props) => {
   const [alljobs,setalljobs]=useState<any>([]);
   const {user,isLoaded}=useUser();
- const getData=async()=>{
-   
- const docRef=query(collection(db,"job-portal"), where("postedBy","==",user?.id ))
+  async function getData(){
+ const docRef=query(collection(db,"job-portal"), where("savedBy","array-contains",user?.id ))
  const docSnap=await getDocs(docRef)
-
+ 
 //  setalljobs(docSnap)
 try{
-
-const all=docSnap.docs.map((doc,index)=>{
-  
+const all=docSnap.docs.map((doc)=>{
+  console.log(doc.id, doc.data());
   const data=doc.data();
-  console.log("s",data);
+  console.log("s",data.title);
  return {title:data.title,desc:data.desc,postedBy:data.postedBy,support:data.support,type:data.type,tags:data.tags,location:data.location,id:doc.id, savedBy:data.savedBy}
  
 
 })
-
-setalljobs(all)
-console.log("gcc",alljobs)
-
+setalljobs(all);
 }catch(e){
-  console.log("ndsfjvd",e)
+    console.log(e);
 }
+
 
   }
   useEffect(()=>{
     getData()
   },[])
-console.log(alljobs,"from outside")
+  console.log('g',alljobs)
   const getUpdate=(docId:string)=>{
 
   
@@ -55,10 +51,10 @@ console.log(alljobs,"from outside")
         <Cards key={elm.id} id={user?.id} updateJob={(docid,type)=>{
           getUpdate(docid)
         }} elm={elm} />
-      )):<p>Noe Data</p>
+      )):null
   }
     </div>
   )
 
 }
-export default MyJobs
+export default Saved
