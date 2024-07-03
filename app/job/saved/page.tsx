@@ -4,7 +4,7 @@ import { collection, doc, getDoc, getDocs, query, where , onSnapshot} from 'fire
 import React, { useEffect, useState } from 'react'
 import Cards from '@/components/Cards';
 import { useUser } from '@clerk/nextjs';
-
+import { Suspense } from 'react';
 type Props = {}
 
 const Saved = (props: Props) => {
@@ -45,7 +45,9 @@ setalljobs(all);
       })
     }
   return (
+    
     <div className='flex flex-col gap-6  overflow-y-scroll p-6 items-center h-screen'>
+    
     {
       alljobs.length>0? alljobs.map((elm : any)=>(
         <Cards key={elm.id} id={user?.id} updateJob={(docid,type)=>{
@@ -53,6 +55,7 @@ setalljobs(all);
         }} elm={elm} />
       )):null
   }
+
     </div>
   )
 

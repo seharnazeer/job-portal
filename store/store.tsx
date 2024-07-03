@@ -3,7 +3,7 @@ import Navbar from "@/components/navbar";
 import SideBar from "@/components/sidebar";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-import { createContext, useContext, useEffect, useState } from "react";
+import { Suspense, createContext, useContext, useEffect, useState } from "react";
 
 
 const AppContext=createContext<any>(undefined);
@@ -30,6 +30,7 @@ export function AppWrapper({children}:{children:React.ReactNode}){
      launch,
      setlaunch
     }}>
+      <Suspense fallback={<h2>Loading....</h2>}>
       <Navbar />
       <div className="flex w-full ">
         <div className=" w-1/4">
@@ -42,6 +43,7 @@ export function AppWrapper({children}:{children:React.ReactNode}){
     }
     </div>
     </div>
+    </Suspense>
     </AppContext.Provider>
   )
 }

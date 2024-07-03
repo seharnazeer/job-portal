@@ -5,9 +5,8 @@ import {collection,addDoc} from "firebase/firestore"
 import { db } from '@/utils/firebase.config'
 import { Bounce, ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
-import Navbar from '@/components/navbar'
 type Props = {}
-
+import { Suspense } from 'react'
 const JobPost = (props: Props) => {
     const [title,settitle]=useState("")
     const [desc,setdesc]=useState("")
@@ -67,7 +66,7 @@ const JobPost = (props: Props) => {
     }
   return (
     <div className='w-full'>
-    
+   
     <ToastContainer />
     <div className='w-full flex items-center min-h-screen text-purple-900'>
         <div className='flex w-full items-center  flex-col justify-center'>
@@ -121,6 +120,7 @@ const JobPost = (props: Props) => {
 
         </div>
     </div>
+  
     </div>
   )
 }

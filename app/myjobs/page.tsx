@@ -55,7 +55,7 @@ console.log(alljobs,"from outside")
         <Cards key={elm.id} id={user?.id} updateJob={(docid,type)=>{
           getUpdate(docid)
         }} elm={elm} />
-      )):<p>Noe Data</p>
+      )):<p>No Data</p>
   }
     </div>
   )
