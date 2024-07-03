@@ -45,7 +45,8 @@ const JobPost = (props: Props) => {
             tags,
             location:localtion,
             support,
-            postedBy: user?.id
+            postedBy: user?.id,
+            savedBy: []
            })
            if(docRef.id){
             settitle("")
@@ -72,7 +73,7 @@ const JobPost = (props: Props) => {
         <div className='flex w-full items-center  flex-col justify-center'>
             <h3 className=' text-xl md:text-5xl font-bold font-mono mb-6 mt-6'>Post Job</h3>
 
-           <div className='flex  flex-col gap-4'>
+           <div className='flex md:w-3/5 w-4/5  flex-col gap-4'>
                 <input value={title} placeholder='Job Title' className='p-2 rounded'  onChange={({target:{value}})=>settitle(value)} />
                 <textarea value={desc} rows={3} placeholder='Desc' className='p-2 rounded'  onChange={({target:{value}})=>setdesc(value)} />
                     <div className='flex gap-2'>

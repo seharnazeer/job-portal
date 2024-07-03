@@ -10,8 +10,8 @@ import LaunchMeeting from "./Modals/launchMeeting";
 type Props = {};
 
 const HeaderSection = (props: Props) => {
-  const [display, setdisplay] = useState(false);
-  const { displayJoinLink, setDisplayJoinLink, launch,setlaunch } = useAppContext();
+const [keyword,setkeyword]=useState("")
+
   return (
     <div className="">
       <div className="  rounded-lg shadow-md  items-center md:flex-row flex-col  justify-center  bg-white flex md:p-0 p-4 ">
