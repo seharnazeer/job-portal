@@ -12,6 +12,6 @@ export const Links=[{
 {
     name:"Scheduled",
     path:"/job/saved",
-    icon:<FaHeart  class="w-6 h-6" />
+    icon:<FaHeart  className="w-6 h-6" />
 }
 ]
