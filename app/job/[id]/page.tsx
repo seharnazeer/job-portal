@@ -8,7 +8,7 @@ import { FaHeart } from 'react-icons/fa';
 
 type Props = {}
 
-const JobDesc = ({params}) => {
+const JobDesc = ({params}:any) => {
     const {user,isLoaded}=useUser();
   console.log(params);
   const [job,setjob]=useState<any>([]);
