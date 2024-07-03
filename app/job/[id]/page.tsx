@@ -10,7 +10,6 @@ type Props = {}
 
 const JobDesc = ({params}:any) => {
     const {user,isLoaded}=useUser();
-  console.log(params);
   const [job,setjob]=useState<any>([]);
   async function getJob(){
     const docRef=doc(db,"job-portal",params.id)
